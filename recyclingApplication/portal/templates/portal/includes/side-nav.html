@@ -1,0 +1,46 @@
+{% load static %}
+
+
+
+<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img src="{% static "images/logo.png" %}" alt="Logo" height="40" class="d-inline-block">
+    <span class="fs-5 ms-2">Recycle For Charity</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li>
+      <a href="{% url "portal:dashboard" %}" class="nav-link text-white">
+        <i class="bi-speedometer2 me-2"></i>
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a href="{% url "portal:requests" %}" class="nav-link text-white">
+        <i class="bi-table me-2"></i>
+        Requests
+      </a>
+    </li>
+    <li>
+      <a href="{% url "portal:volunteers" %}" class="nav-link text-white">
+        <i class="bi-grid me-2"></i>
+        Volunteer
+      </a>
+    </li>
+    <li>
+      <a href="{% url "portal:settings" %}" class="nav-link text-white">
+        <i class="bi-people me-2"></i>
+        Settings
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <div class="dropdown">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="{% static "images/user_thumbnail.png" %}" alt="" width="32" height="32" class="rounded-circle me-2">
+      <strong>{{user.first_name}} {{user.last_name}}</strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+      <li><a class="dropdown-item" href="{% url "portal:portal_logout" %}">Log Out</a></li>
+    </ul>
+  </div>
+

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block page_title %}Thank you for your request{% endblock page_title %}
+{% block css %}<link rel="stylesheet" href="{% static 'challenges/css/thank-you.css' %}" />{% endblock css %}
+{% block content %}
+
+{% include "homepage/includes/header.html" with active_page="thanks" %}
+
+<div class="container-fluid thank-you-wrapper" >
+  <div class="row mx-auto pt-5">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <div class="shadow-sm p-3 mb-5 bg-body rounded">
+        <h1>Thank you for your request!</h1>
+        <p>We will have our volunteer to pick up your kindness.</p>
+        <p>Your token: {{token}}</p>
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+</div>
+
+{% include "homepage/includes/footer.html"%}
+
+{% endblock content %}
+

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block page_title %}Portal Home{% endblock page_title %}
+
+{% block content %}
+<div class="d-flex" style="display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;">
+  
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100%">
+  {% include "portal/includes/side-nav.html" %}
+</div>
+
+<div style="width: 100%;">
+  {% include "portal/includes/header.html" %}
+
+  <div class="container mt-5">
+    <h1>All Requests</h1>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Postal Code</th>
+            <th>Status</th>
+            <th>Date Created</th>
+            <th>Claimed By</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for req in requests %}
+          <tr>
+            <td>{{req.first_name}}</td>
+            <td>{{req.last_name}}</td>
+            <td>{{req.email}}</td>
+            <td>{{req.phone}}</td>
+            <td>{{req.address}}</td>
+            <td>{{req.city}}</td>
+            <td>{{req.state}}</td>
+            <td>{{req.country}}</td>
+            <td>{{req.postal_code}}</td>
+            <td>{{req.status}}</td>
+            <td>{{req.date_created}}</td>
+            <td>{{req.claimed_by}}</td>
+          </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+    
+  </div>
+</div>
+
+{% endblock content %}

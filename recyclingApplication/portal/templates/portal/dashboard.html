@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block page_title %}Portal Home{% endblock page_title %}
+
+{% block content %}
+<div class="d-flex" style="display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;">
+  
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100%">
+  {% include "portal/includes/side-nav.html" %}
+</div>
+
+<div style="width: 100%;">
+  {% include "portal/includes/header.html" %}
+
+  <div class="container">
+    
+    <h1>This is dashboard page</h1>
+    
+  </div>
+</div>
+
+{% endblock content %}
