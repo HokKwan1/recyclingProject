@@ -12,8 +12,8 @@ class Request(models.Model):
   country = models.CharField(max_length=64)
   postal_code = models.CharField(max_length=64)
   status = models.CharField(max_length=32)
-  date_created = models.DateField(auto_now_add=True)
-  date_completed = models.DateField(null=True, blank=True)
+  date_created = models.DateTimeField(auto_now_add=True)
+  date_completed = models.DateTimeField(null=True, blank=True)
   token = models.CharField(max_length=512)
   claimed_by = models.CharField(max_length=12, null=True, blank=True)
 

@@ -10,5 +10,5 @@ urlpatterns = [
     path("requests", views.RequsetsView.as_view(), name="requests"),
     path("volunteers", views.VolunteersView.as_view(), name="volunteers"),
     path("settings", views.SettingsView.as_view(), name="settings"),
-    path("dashboard", views.DashboardView.as_view(), name="dashboard"),
+    path("dashboard", views.DashboardView.as_view(), name="dashboard")
 ]

@@ -1,13 +1,10 @@
-from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
-from django.template.loader import render_to_string
-from django.views import View
-
-from .forms import CreateRequestForm
-
-from django.utils import timezone
 import secrets
+
+from django.shortcuts import render
+from django.views import View
+from .forms import CreateRequestForm
+from django.utils import timezone
+from portal.services.email_services import EmailService
 
 # Create your views here.
 
@@ -28,6 +25,10 @@ class IndexView(View):
             instance.token = token
 
             instance.save()
+
+            email_service = EmailService()
+            email_service.send_welcome_email(instance=instance)
+
             return render(request, "homepage/thank_you.html", {
                 'token' : token
             })
@@ -46,6 +47,9 @@ class IndexView(View):
             # 404.html in the root templates. Just make sure the filename is
             # 404.html. Require DEBUG=False to show the 404 page.
             # raise Http404()
+
+    
+
 
 
 
