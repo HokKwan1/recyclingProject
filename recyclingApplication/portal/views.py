@@ -10,6 +10,7 @@ from homepage.models import Request
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User as AuthUser, Group
+from portal.services.email_services import EmailService
 
 # Create your views here.
 
@@ -90,4 +91,27 @@ class SettingsView(View):
     
 class DashboardView(View):
     def get(self, request):
-        return render(request, "portal/dashboard.html")
+        chart_data = {
+        'chart': {
+            'type': 'column'
+        },
+        'title': {
+            'text': 'Monthly Sales'
+        },
+        'xAxis': {
+            'categories': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+        },
+        'yAxis': {
+            'title': {
+                'text': 'Sales'
+            }
+        },
+        'series': [{
+            'name': 'Sales',
+            'data': [10, 15, 25, 30, 40]
+        }]
+    }
+        return render(request, "portal/dashboard.html",{
+            'chart_data': chart_data
+        })
+    
