@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User as AuthUser
 
 # Create your models here.
 class Request(models.Model):
@@ -12,10 +13,10 @@ class Request(models.Model):
   country = models.CharField(max_length=64)
   postal_code = models.CharField(max_length=64)
   status = models.CharField(max_length=32)
-  date_created = models.DateTimeField(auto_now_add=True)
+  date_created = models.DateTimeField(auto_now_add=False)
   date_completed = models.DateTimeField(null=True, blank=True)
   token = models.CharField(max_length=512)
-  claimed_by = models.CharField(max_length=12, null=True, blank=True)
+  claimed_by = models.ForeignKey(AuthUser, null=True, blank=True, on_delete=models.SET_NULL, related_name="claimed_requests")
 
   def __str__(self):
     return self.first_name + " " + self.last_name

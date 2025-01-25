@@ -1,27 +1,35 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block page_title %}Portal Login{% endblock page_title %}
+{% block css %}<link rel="stylesheet" href="{% static 'portal/css/login.css' %}" />{% endblock css %}
 
 {% block content %}
+
 <div class="d-flex flex-column justify-content-center align-items-center" style="height:100vh;">
-  <img src="{% static "images/logo-word.png" %}" width="30%" class="mb-5">
-  <div class="container-fluid mt-3 col-md-6 col-lg-6 my-a shadow p-3 mb-5 bg-body rounded text-center">
-    <h2>Login form</h2>
-      <form method="POST" class="max-w-sm mx-auto ">
+  <div class="wrapper">
+    <div class="logo">
+        <img src="{% static "images/logo.png" %}" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        Recycle For Charity
+    </div>
+    <form class="p-3 mt-3" method="POST">
         {% csrf_token %} 
         {% for field in loginForm %}
-        <div class="mb-3 mt-3">
-          <label class="form-label">{{ field.label_tag }}</label>
-          {{ field }} {{ field.errors }}
-        </div>
-        {% endfor %}
-        <div class="flex items-center justify-end">
+        {{ field.label_tag }}
+          <div class="form-field d-flex align-items-center">
+            {{ field }} {{ field.errors }}
+          </div>
+          {% endfor %}
           <button type="submit" class="btn btn-primary">Login</button>
-        </div>
-      </form>
+    </form>
+    <div class="text-center fs-6">
+        <a href="#">Forget password?</a> or <a href="#">Sign up</a>
     </div>
   </div>
+</div>
+
+
 {% endblock content %}
 
 

@@ -1,0 +1,10 @@
+.side-nav {
+  background-color: #89A8B2;
+}
+
+.btn-color-primary {
+  background-color: #98D8EF!important;
+  border-color: #98D8EF!important;
+  padding: 10px 20px;
+  font-size: 16px;
+}

@@ -1,19 +1,21 @@
 {% load static %}
 
-
-
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white side-nav" style="width: 280px; height: 100%">
+<link rel="stylesheet" href="{% static 'portal/css/side-nav.css' %}" />
 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <img src="{% static "images/logo.png" %}" alt="Logo" height="40" class="d-inline-block">
     <span class="fs-5 ms-2">Recycle For Charity</span>
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
+    {% if request.user.is_staff %}
     <li>
       <a href="{% url "portal:dashboard" %}" class="nav-link text-white">
         <i class="bi-speedometer2 me-2"></i>
         Dashboard
       </a>
     </li>
+    {% endif %}
     <li>
       <a href="{% url "portal:requests" %}" class="nav-link text-white">
         <i class="bi-table me-2"></i>
@@ -44,3 +46,4 @@
     </ul>
   </div>
 
+</div>
