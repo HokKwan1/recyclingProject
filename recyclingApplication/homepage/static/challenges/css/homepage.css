@@ -59,6 +59,8 @@ button.btn-primary:hover {
 
 .message-section {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url("../../../../static/images/recycle-bins.jpg") fixed center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
   padding: 50px 20px;
   text-align: center;

@@ -4,6 +4,15 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.alert {
+  margin-bottom: 0!important;
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  max-width: 600px;
+  z-index: 99;
+}
+
 
 #foo {
   color: #98D8EF;
