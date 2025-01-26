@@ -1,22 +1,15 @@
-{% extends "base.html" %}
-
-{% block page_title %}Portal Home{% endblock page_title %}
-
+{% extends "base.html" %} 
+{% load static %}
 {% block content %}
-<div class="d-flex" style="display: flex;
-  flex-wrap: nowrap;
-  height: 100vh;
-  height: -webkit-fill-available;
-  max-height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;">
+
+ <!-- Sticky Header -->
+ {% include "portal/includes/header.html" %}
+
+<div class="wrapper">
+    {% include "portal/includes/side-nav.html" %}
   
-  {% include "portal/includes/side-nav.html" %}
-
-<div style="width: 100%;">
-  {% include "portal/includes/header.html" %}
-
-  <div class="container-fluid p-5">
+  <!-- Main Content -->
+  <div class="main-content">
     <a href="{% url 'portal:add_volunteer' %}" class="btn btn-primary float-end">Add New Volunteer</a>
     <h1>All volunteers</h1>
     <div class="table-responsive" style="max-height: 800px; overflow-y: auto;">
@@ -42,7 +35,7 @@
             <td>{{ vol.completed_requests.all|length }}</td>
             <td>{{ vol.claimed_requests.all|length }}</td>
             <td>
-              <a href="{% url "portal:portal_home" vol.id %}">Details</a>
+              <a href="{% url 'portal:volunteer_details' vol.id %}">Details</a>
             </td>
 
           </tr>
@@ -74,8 +67,9 @@
           </li>
         {% endif %}
       </ul>
-    </nav>  
+    </nav> 
   </div>
 </div>
-
 {% endblock content %}
+
+

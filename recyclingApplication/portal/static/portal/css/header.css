@@ -1,5 +1,9 @@
 .navbar {
   background-color: #89A8B2;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  width: 100%;
 }
 
 .btn-color-primary {

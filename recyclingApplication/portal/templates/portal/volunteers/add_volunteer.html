@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+
+ <!-- Sticky Header -->
+ {% include "portal/includes/header.html" %}
+
+<div class="wrapper">
+    {% include "portal/includes/side-nav.html" %}
+  
+  <!-- Main Content -->
+  <div class="main-content">
+    <h2>Add New Volunteer</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary">Add Volunteer</button>
+      <a href="{% url 'portal:volunteers' %}" class="btn btn-secondary"
+        >Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock content %}

@@ -1,13 +1,11 @@
 {% load static %}
-
-{% comment %} {{ active_page }} {% endcomment %}
 <link rel="stylesheet" href="{% static 'portal/css/header.css' %}" />
-<nav class="navbar navbar-expand-sm">
-  <div class="container-fluid py-2">
-    <div class="collapse navbar-collapse">
-      <div class="me-auto"></div>
-        <button class="btn btn-primary" 
-        type="button"  onclick="window.location.href='{% url 'portal:portal_home' %}';">Use later</button>
-    </div>
-  </div>
+<nav class="navbar px-3">
+  <a
+    href="/"
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <img src="{% static "images/logo.png" %}" alt="Logo" height="40"
+    class="d-inline-block">
+    <span class="fs-5 ms-2">Recycle For Charity</span>
+  </a>
 </nav>

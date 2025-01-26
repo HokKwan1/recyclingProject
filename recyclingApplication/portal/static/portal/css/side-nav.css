@@ -1,10 +1,23 @@
-.side-nav {
+.sidebar {
   background-color: #89A8B2;
+  width: 250px!important;
+  color: white;
+  padding: 15px;
+  position: sticky;
+  top: 56px;
+  /* Adjust based on navbar height */
+  height: calc(100vh - 56px);
+  overflow-y: auto;
 }
 
 .btn-color-primary {
-  background-color: #98D8EF!important;
-  border-color: #98D8EF!important;
+  background-color: #98D8EF !important;
+  border-color: #98D8EF !important;
   padding: 10px 20px;
   font-size: 16px;
+}
+
+.dropdown {
+  position: absolute;
+  bottom: 20px;
 }

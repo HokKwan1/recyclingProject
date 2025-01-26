@@ -38,13 +38,11 @@
         setTimeout(function() {
             let alertBox = document.getElementById("alert");
             if (alertBox) {
-                alertBox.classList.remove("show"); // Bootstrap 5 fade out
-                setTimeout(() => alertBox.remove(), 500); // Remove after fade-out
+                alertBox.classList.remove("show"); 
+                setTimeout(() => alertBox.remove(), 500);
             }
         }, 5000); // 5 seconds
     </script>
-      
-    {% comment %} {% endif %} {% endcomment %}
     {% block content %}{% endblock content %}
   </body>
 </html>

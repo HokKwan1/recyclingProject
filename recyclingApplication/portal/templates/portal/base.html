@@ -1,4 +1,6 @@
-{% extends "base.html" %} 
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 {% load static %}
 {% block content %}
 
@@ -6,8 +8,10 @@
  {% include "portal/includes/header.html" %}
 
 <div class="wrapper">
+  
     {% include "portal/includes/side-nav.html" %}
   
+
   <!-- Main Content -->
   <div class="main-content">
       <h2>Main Content</h2>
@@ -16,4 +20,9 @@
       <div style="height: 1500px; background: #f8f9fa;"></div>
   </div>
 </div>
+
+
+
+
+
 {% endblock content %}

@@ -1,12 +1,7 @@
 {% load static %}
 
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white side-nav" style="width: 280px; height: 100%">
 <link rel="stylesheet" href="{% static 'portal/css/side-nav.css' %}" />
-<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <img src="{% static "images/logo.png" %}" alt="Logo" height="40" class="d-inline-block">
-    <span class="fs-5 ms-2">Recycle For Charity</span>
-  </a>
-  <hr>
+<div class="sidebar">
   <ul class="nav nav-pills flex-column mb-auto">
     {% if request.user.is_staff %}
     <li>
@@ -45,5 +40,4 @@
       <li><a class="dropdown-item" href="{% url "portal:portal_logout" %}">Log Out</a></li>
     </ul>
   </div>
-
 </div>

@@ -5,51 +5,43 @@
 {% block content %}
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<div class="d-flex" style="display: flex;
-  flex-wrap: nowrap;
-  height: 100vh;
-  height: -webkit-fill-available;
-  max-height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;">
+ <!-- Sticky Header -->
+ {% include "portal/includes/header.html" %}
 
-  {% include "portal/includes/side-nav.html" %}
-
-<div style="width: 100%;overflow-y:auto">
-  {% include "portal/includes/header.html" %}
-
-  <div class="container-fluid p-5">
-    
+<div class="wrapper">
+    {% include "portal/includes/side-nav.html" %}
+  
+  <!-- Main Content -->
+  <div class="main-content">
     <h1>This is dashboard page</h1>
-
-
     <div class="container-fluid mt-4">
       <div class="row mb-5">
-          <div class="col-12 col-sm-6 col-md-4 p-3">
-            <div id="chartA">
-              <script type="text/javascript">
-              // Initialize the chart with data passed from the view
-              Highcharts.chart('chartA', {{ user_status_data|safe }});
-              </script>
-            </div>
+        <div class="col-12 col-sm-6 col-md-4 p-3">
+          <div id="chartA">
+            <script type="text/javascript">
+            // Initialize the chart with data passed from the view
+            Highcharts.chart('chartA', {{ user_status_data|safe }});
+            </script>
           </div>
-          <div class="col-12 col-sm-6 col-md-4 p-3">
-            <div id="chartB" style="width: 100%">
-              <script type="text/javascript">
-              // Initialize the chart with data passed from the view
-              Highcharts.chart('chartB', {{ count_data|safe }});
-              </script>
-            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 p-3">
+          <div id="chartB" style="width: 100%">
+            <script type="text/javascript">
+            // Initialize the chart with data passed from the view
+            Highcharts.chart('chartB', {{ count_data|safe }});
+            </script>
           </div>
-          <div class="col-12 col-sm-6 col-md-4 p-3">
-            <div id="chartC" style="width: 100%">
-              <script type="text/javascript">
-              // Initialize the chart with data passed from the view
-              Highcharts.chart('chartC', {{ chart_data|safe }});
-              </script>
-            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 p-3">
+          <div id="chartC" style="width: 100%">
+            <script type="text/javascript">
+            // Initialize the chart with data passed from the view
+            Highcharts.chart('chartC', {{ chart_data|safe }});
+            </script>
           </div>
+        </div>
       </div>
+
       <div class="row py-3">
         <div class="col-12 col-sm-6 col-md-4 p-3">
           <div id="chartD" style="width: 100%">
@@ -59,53 +51,51 @@
             </script>
           </div>
         </div>
-          <div class="col-12 col-sm-6 col-md-4 p-3">
-            <div class="container">
-              <h2 class="mb-4">Recently Joined Volunteers</h2>
-              <table class="table">
-                  <thead>
-                      <tr>
-                          <th>Name</th>
-                          <th>Joined Date</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {% for user in latest_joined_volunteer %}
-                          <tr>
-                              <td>{{ user.first_name }} {{user.last_name }}</td>
-                              <td>{{ user.date_joined }}</td>
-                          </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-            </div>
+        <div class="col-12 col-sm-6 col-md-4 p-3">
+          <div class="container">
+            <h2 class="mb-4">Recently Joined Volunteers</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Joined Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in latest_joined_volunteer %}
+                        <tr>
+                            <td>{{ user.first_name }} {{user.last_name }}</td>
+                            <td>{{ user.date_joined }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
           </div>
-          <div class="col-12 col-sm-6 col-md-4 p-3">
-            <div class="container">
-              <h2 class="mb-4">Recently Submitted Request</h2>
-              <table class="table">
-                  <thead>
-                      <tr>
-                          <th>City</th>
-                          <th>Submitted Date</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {% for req in latest_submitted_Request %}
-                          <tr>
-                              <td>{{ req.city }}</td>
-                              <td>{{ req.date_created }}</td>
-                          </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 p-3">
+          <div class="container">
+            <h2 class="mb-4">Recently Submitted Request</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Submitted Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for req in latest_submitted_Request %}
+                        <tr>
+                            <td>{{ req.city }}</td>
+                            <td>{{ req.date_created }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
           </div>
-          
+        </div>
       </div>
+    </div>
   </div>
-
-    
 </div>
 
 {% endblock content %}

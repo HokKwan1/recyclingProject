@@ -2,15 +2,30 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .alert {
-  margin-bottom: 0!important;
+  margin-bottom: 0 !important;
   position: absolute;
   top: 3rem;
   right: 3rem;
   max-width: 600px;
   z-index: 99;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
 
@@ -31,4 +46,3 @@ body {
   color: #525B44;
 
 }
-
