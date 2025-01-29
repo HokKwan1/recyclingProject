@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{% static 'portal/css/side-nav.css' %}" />
 <div class="sidebar">
   <ul class="nav nav-pills flex-column mb-auto">
+    {% comment %} Dashboard and all request are onlu available for admin user {% endcomment %}
     {% if request.user.is_staff %}
     <li>
       <a href="{% url "portal:dashboard" %}" class="nav-link text-white">
@@ -10,19 +11,32 @@
         Dashboard
       </a>
     </li>
-    {% endif %}
     <li>
       <a href="{% url "portal:requests" %}" class="nav-link text-white">
         <i class="bi-table me-2"></i>
-        Requests
+        All Requests
       </a>
     </li>
     <li>
       <a href="{% url "portal:volunteers" %}" class="nav-link text-white">
         <i class="bi-grid me-2"></i>
-        Volunteer
+        Volunteers
       </a>
     </li>
+    {% else %}
+    <li>
+      <a href="{% url "portal:request_available" %}" class="nav-link text-white">
+        <i class="bi-grid me-2"></i>
+        Available Requests
+      </a>
+    </li>
+    <li>
+      <a href="{% url "portal:request_volunteer" request.user.id|default:0 %}" class="nav-link text-white">
+        <i class="bi-grid me-2"></i>
+        Claimed Requests
+      </a>
+    </li>
+    {% endif %}
     <li>
       <a href="{% url "portal:settings" %}" class="nav-link text-white">
         <i class="bi-people me-2"></i>

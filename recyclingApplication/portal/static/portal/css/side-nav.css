@@ -1,6 +1,7 @@
 .sidebar {
   background-color: #89A8B2;
-  width: 250px!important;
+  width: 250px;
+  flex: 0 0 250px; 
   color: white;
   padding: 15px;
   position: sticky;

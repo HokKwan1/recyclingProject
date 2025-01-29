@@ -3,6 +3,12 @@ from django.contrib.auth.models import User as AuthUser
 
 # Create your models here.
 class Request(models.Model):
+  STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+    ]
+  
   first_name = models.CharField(max_length=256)
   last_name = models.CharField(max_length=256)
   email = models.CharField(max_length=256)
@@ -12,7 +18,7 @@ class Request(models.Model):
   state = models.CharField(max_length=64)
   country = models.CharField(max_length=64)
   postal_code = models.CharField(max_length=64)
-  status = models.CharField(max_length=32)
+  status = models.CharField(max_length=32, choices=STATUS_CHOICES, default='pending')
   date_created = models.DateTimeField(auto_now_add=False)
   date_completed = models.DateTimeField(null=True, blank=True)
   token = models.CharField(max_length=512)
