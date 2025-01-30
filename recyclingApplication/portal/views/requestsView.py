@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse
 from django.views import View
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -10,7 +12,7 @@ from portal.services.google_services import get_coordinates
 
 
 class BaseRequestView(LoginRequiredMixin, View):
-    """Base view to handle login redirection and filtering logic."""
+    # Base view to handle login redirection and filtering logic.
     login_url = 'portal:portal_login'
     title = "Requests"
 
@@ -19,7 +21,7 @@ class BaseRequestView(LoginRequiredMixin, View):
         return redirect(self.get_login_url())
 
     def filter_and_paginate(self, request, queryset, default_sort='-date_created'):
-        """Applies filters, sorting, and pagination to a request queryset."""
+        # Applies filters, sorting, and pagination to a request queryset.
         filter_set = RequestFilter(request.GET, queryset=queryset)
         sorted_requests = filter_set.qs.order_by(request.GET.get('sort_by', default_sort))
         paginator = Paginator(sorted_requests, 7)
@@ -34,8 +36,8 @@ class BaseRequestView(LoginRequiredMixin, View):
 
 
 class RequestsView(BaseRequestView):
-    """View for all requests based on user role."""
-    title = "All Requests"
+    # View for all requests based on user role.
+    title = "All"
 
     def get(self, request):
         request_list = Request.objects.all() if request.user.is_staff else Request.objects.filter(claimed_by=request.user.id)
@@ -44,7 +46,7 @@ class RequestsView(BaseRequestView):
 
 
 class RequestDetailsView(LoginRequiredMixin, View):
-    """View for displaying request details with map coordinates."""
+    # View for displaying request details with map coordinates.
     login_url = 'portal:portal_login'
 
     def get(self, request, id):
@@ -55,7 +57,7 @@ class RequestDetailsView(LoginRequiredMixin, View):
 
 
 class RestrictedVolunteerView(BaseRequestView):
-    """Base view restricting staff from accessing volunteer-related pages."""
+    # Base view restricting staff from accessing volunteer-related pages.
     
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_staff:
@@ -65,7 +67,7 @@ class RestrictedVolunteerView(BaseRequestView):
 
 
 class AvailableRequestView(RestrictedVolunteerView):
-    """View for listing available (pending) requests."""
+    # View for listing available (pending) requests.
     title = "Available"
 
     def get(self, request):
@@ -74,7 +76,7 @@ class AvailableRequestView(RestrictedVolunteerView):
 
 
 class VolunteerRequestView(RestrictedVolunteerView):
-    """View for listing requests claimed by the logged-in volunteer."""
+    # View for listing requests claimed by the logged-in volunteer.
     title = "Claimed"
 
     def get(self, request, user_id):
@@ -83,7 +85,7 @@ class VolunteerRequestView(RestrictedVolunteerView):
 
 
 class ClaimRequestView(LoginRequiredMixin, View):
-    """View for handling request claiming by volunteers."""
+    # View for handling request claiming by volunteers.
     login_url = 'portal:portal_login'
 
     def post(self, request, request_id):
@@ -93,12 +95,25 @@ class ClaimRequestView(LoginRequiredMixin, View):
             messages.warning(request, "This request has already been claimed.")
         else:
             claimed_requests = Request.objects.all().filter(claimed_by=request.user.id).filter(status='in_progress')
-            if claimed_requests.__len__() > 5:
+            if claimed_requests.__len__() >= 5:
                 messages.error(request,  "You have claimed too many requests.")
             else:
                 req.claimed_by = request.user
                 req.status = "in_progress"
-                # req.save()
+                req.save()
                 messages.success(request, "You have successfully claimed the request.")
 
         return redirect("portal:request_available")
+    
+class CompleteRequestView(BaseRequestView):
+    # View for handling request completion by volunteers.
+    login_url = 'portal:portal_login'
+
+    def post(self, request, request_id):
+        req = get_object_or_404(Request, id=request_id)
+        req.status = "completed"
+        req.save()
+        messages.success(request, "You have successfully completed the request.")
+        url = reverse("portal:request_volunteer", kwargs={"user_id": request.user.id}) + "?status=in_progress"
+        return HttpResponseRedirect(url)
+        

@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class LoginForm(forms.Form):
@@ -24,3 +25,18 @@ class VolunteerForm(forms.ModelForm):
             user.set_password(self.cleaned_data["password"])  # Hash password before saving
             user.save()
         return user
+    
+
+class CustomPasswordResetForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label="Current Password",
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Enter current password"}),
+    )
+    new_password1 = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Enter new password"}),
+    )
+    new_password2 = forms.CharField(
+        label="Confirm New Password",
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Confirm new password"}),
+    )

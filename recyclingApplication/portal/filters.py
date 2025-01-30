@@ -1,5 +1,5 @@
 import django_filters
-from homepage.models import Request  # Import your model
+from homepage.models import Request
 
 class RequestFilter(django_filters.FilterSet):
     status = django_filters.ChoiceFilter(choices=Request.STATUS_CHOICES)

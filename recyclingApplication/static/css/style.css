@@ -40,6 +40,10 @@ body {
   color: #E91E63!important; 
 }
 
+.disable-bg-color {
+  background-color: #B3C8CF;
+}
+
 
 
 #foo {
