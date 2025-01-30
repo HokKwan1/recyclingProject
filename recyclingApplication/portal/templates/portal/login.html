@@ -13,13 +13,14 @@
     <div class="text-center mt-4 name">
         Recycle For Charity
     </div>
-    <form class="p-3 mt-3" method="POST">
+    <form class="p-3 mt-3" method="POST" novalidate>
         {% csrf_token %} 
         {% for field in loginForm %}
         {{ field.label_tag }}
           <div class="form-field d-flex align-items-center">
-            {{ field }} {{ field.errors }}
+            {{ field }}
           </div>
+          {{ field.errors }}
           {% endfor %}
           <button type="submit" class="btn btn-primary">Login</button>
     </form>

@@ -34,7 +34,6 @@ class BaseRequestView(LoginRequiredMixin, View):
             'title': self.title
         })
 
-
 class RequestsView(BaseRequestView):
     # View for all requests based on user role.
     title = "All"
@@ -43,7 +42,6 @@ class RequestsView(BaseRequestView):
         request_list = Request.objects.all() if request.user.is_staff else Request.objects.filter(claimed_by=request.user.id)
         requests, filter_set = self.filter_and_paginate(request, request_list)
         return self.render_request_page(request, requests, filter_set)
-
 
 class RequestDetailsView(LoginRequiredMixin, View):
     # View for displaying request details with map coordinates.

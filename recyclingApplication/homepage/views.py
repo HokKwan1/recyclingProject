@@ -20,7 +20,7 @@ class IndexView(View):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.date_created = timezone.now().date()
-            instance.status = "Pending"
+            instance.status = "pending"
             token = secrets.token_urlsafe(16)
             instance.token = token
 
