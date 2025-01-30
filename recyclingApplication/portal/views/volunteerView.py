@@ -5,6 +5,7 @@ from django.contrib.auth.models import User as AuthUser
 from homepage.models import Request
 
 from django.shortcuts import render
+from portal.filters import RequestFilter
 from portal.forms import VolunteerForm
 
 from django.contrib import messages
@@ -48,8 +49,11 @@ class VolunteerDetailsView(LoginRequiredMixin, View):
     def get(self, request, id):
         volunteer = AuthUser.objects.get(id=id)
         requests = Request.objects.all().filter(claimed_by=volunteer)
-        print(requests)
+        # Apply the filter
+        filter_set = RequestFilter(request.GET, queryset=requests)
+        filtered_requests = filter_set.qs
         return render(request, 'portal/volunteers/volunteer_details.html', {
             'volunteer': volunteer,
-            'requests': requests
+            'requests': filtered_requests,
+            'filter': filter_set
         })

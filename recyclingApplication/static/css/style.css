@@ -24,9 +24,26 @@ body {
 
 .main-content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 20px 50px;
   overflow-y: auto;
 }
+
+.success-color {
+  color: #4CAF50!important; 
+}
+
+.accent-color {
+  color: #FFEB3B!important; 
+}
+
+.warn-color {
+  color: #E91E63!important; 
+}
+
+.disable-bg-color {
+  background-color: #B3C8CF;
+}
+
 
 
 #foo {

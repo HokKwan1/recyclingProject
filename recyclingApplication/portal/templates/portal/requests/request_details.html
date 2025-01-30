@@ -1,0 +1,80 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block page_title %}Request Details for {{request }}{% endblock page_title %}
+{% block content %}
+ <!-- Sticky Header -->
+ {% include "portal/includes/header.html" %}
+
+<div class="wrapper">
+    {% include "portal/includes/side-nav.html" %}
+  
+  <!-- Main Content -->
+  <div class="main-content">
+    <h2>Request Details</h2>
+    <div class="row mt-3">
+      <div class="col-sm-6">
+        <h3>Customer Information</h3>
+        <div class="row">
+          <div class="col-sm-4">Full Name: </div>
+          <div class="col-sm-8"> {{ request.first_name }} {{ request.last_name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Email </div>
+          <div class="col-sm-8"> {{ request.email }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Address </div>
+          <div class="col-sm-8"> {{ request.address}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">City </div>
+          <div class="col-sm-8"> {{ request.city }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">State </div>
+          <div class="col-sm-8"> {{ request.state }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Country </div>
+          <div class="col-sm-8"> {{ request.country }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Postal Code </div>
+          <div class="col-sm-8"> {{ request.postal_code }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Phone </div>
+          <div class="col-sm-8"> {{ request.phone }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Status </div>
+          <div class="col-sm-8 fw-bold {% if request.status == 'completed' %}success-color {% else %}warn-color{% endif %}"> {{ request.status }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Complete Order</div>
+          <div class="col-sm-8">
+            <form method="post" action="{% url 'portal:complete_request' request.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary btn-sm {% if request.status == "completed" %}btn-secondary{% endif %}" {% if request.status == "completed" %}disabled{% endif %}>Completed</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+          <h3>Map Location</h3>
+          {% if locations %}
+              <iframe src="{{ locations }}" width="600" height="450" frameborder="0" style="border:0; display:block;"></iframe>
+          {% else %}
+              <p>Map could not be loaded. Please check the address.</p>
+          {% endif %}
+      </div>
+
+    </div>
+    
+
+
+    
+  </div>
+</div>
+{% endblock content %}
