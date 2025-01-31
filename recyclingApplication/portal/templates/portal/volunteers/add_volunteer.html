@@ -14,7 +14,7 @@
     <form method="post">
       {% csrf_token %}
       <div class="mb-3">{{ form.as_p }}</div>
-      <button type="submit" class="btn btn-primary">Add Volunteer</button>
+      <button type="submit" class="btn primary-bg-color text-white">Add Volunteer</button>
       <a href="{% url 'portal:volunteers' %}" class="btn btn-secondary"
         >Cancel</a>
     </form>
