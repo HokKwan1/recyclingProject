@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block page_title %}Request Lookup{% endblock page_title %}
+{% block css %}<link rel="stylesheet" href="{% static 'challenges/css/thank-you.css' %}" />{% endblock css %}
+{% block content %}
+
+{% include "homepage/includes/header.html" with active_page="thanks" %}
+
+<div class="container-fluid thank-you-wrapper" >
+  <div class="row mx-auto pt-5">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="shadow-sm p-3 mb-5 bg-body rounded">
+        <h1>Here is Your request status!</h1>
+        <div class="row">
+          <div class="col-sm-4">Full Name: </div>
+          <div class="col-sm-8"> {{ request_obj.first_name }} {{ request_obj.last_name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Email </div>
+          <div class="col-sm-8"> {{ request_obj.email }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Address </div>
+          <div class="col-sm-8"> {{ request_obj.address}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">City </div>
+          <div class="col-sm-8"> {{ request_obj.city }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">State </div>
+          <div class="col-sm-8"> {{ request_obj.state }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Country </div>
+          <div class="col-sm-8"> {{ request_obj.country }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Postal Code </div>
+          <div class="col-sm-8"> {{ request_obj.postal_code }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Phone </div>
+          <div class="col-sm-8"> {{ request_obj.phone }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">Status </div>
+          <div class="col-sm-8 fw-bold {% if request_obj.status == 'completed' %}success-color {% else %}warn-color{% endif %}"> {{ request_obj.status }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</div>
+
+{% include "homepage/includes/footer.html"%}
+
+{% endblock content %}
+
