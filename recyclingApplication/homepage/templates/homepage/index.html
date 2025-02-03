@@ -120,7 +120,7 @@
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
       <h1 class="text-center mb-3">Check the Status of Your Submitted Request</h1>
-      <form method="post" class="w-75" novalidate>
+      <form method="post" class="w-75">
         {% csrf_token %}
         {% for field in tokenForm %}
           <div class="form-group mb-2 {% if field.errors %}has-error{% endif %}">
