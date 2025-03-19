@@ -1,12 +1,16 @@
 import sendgrid
-import os
 from sendgrid.helpers.mail import Mail, To, Personalization, Email
 from django.conf import settings
 
+# This class handles sending emails using SendGrid.
+# It is used to send welcome emails when a new recycling request is submitted.
 class EmailService:
+    # Initializes the SendGrid API client using the API key from Django settings.
   def __init__(self):
     self.sg = sendgrid.SendGridAPIClient(api_key=settings.SENDGRID_API_KEY)
         
+    # Sends a welcome email to the customer who submitted a recycling request.
+    # :param instance: A Request object containing customer details.
   def send_welcome_email(self, instance):
         self.sg = sendgrid.SendGridAPIClient(api_key=settings.SENDGRID_API_KEY)
         print(instance.status)

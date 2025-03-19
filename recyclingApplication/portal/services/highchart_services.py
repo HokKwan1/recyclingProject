@@ -37,10 +37,13 @@ def createVolunteerRankingChart():
     }
     return data
 
-
+# Method to get the volunteer status for charting. 
 def createActiveUserChart():
+    # Query the database onlu reutrn volunteer information
     user_status_counts = AuthUser.objects.all().filter(
         is_staff=False).values('is_active').annotate(count=Count('id'))
+    
+    # Construct the data
     data = {
         'chart': {
             'type': 'column'
