@@ -46,3 +46,7 @@ class CreateRequestForm(forms.ModelForm):
         model = Request
         fields = ['first_name', 'last_name', 'email', 'phone',
                   'address', 'city', 'state', 'country', 'postal_code']
+
+
+class RequestByTokenForm(forms.Form):
+    token = forms.CharField(max_length=512, required=True, label="Enter token")

@@ -136,3 +136,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SENDGRID_API_KEY = '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'
 SENDGRID_EMAIL_FROM = 'hokkwanuol@gmail.com'
 SENDGRID_REQUEST_SUBMIT_EMAIL = 'd-6a824a432fab4c1db9d98af181d2c965'
+
+# Google Map API Key
+GOOGLE_MAP_KEY = 'AIzaSyCK_dd-qY0FadiLl7idwLnxA3M9A7tgyRs'

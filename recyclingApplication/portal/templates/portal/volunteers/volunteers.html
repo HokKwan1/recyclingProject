@@ -10,7 +10,7 @@
   
   <!-- Main Content -->
   <div class="main-content">
-    <a href="{% url 'portal:add_volunteer' %}" class="btn btn-primary float-end">Add New Volunteer</a>
+    <a href="{% url 'portal:add_volunteer' %}" class="btn primary-bg-color text-white float-end">Add New Volunteer</a>
     <h1>All volunteers</h1>
     <div class="table-responsive" style="max-height: 800px; overflow-y: auto;">
       <table class="table table-striped table-hover table-bordered">
@@ -35,7 +35,9 @@
             <td>{{ vol.completed_requests.all|length }}</td>
             <td>{{ vol.claimed_requests.all|length }}</td>
             <td>
-              <a href="{% url 'portal:volunteer_details' vol.id %}">Details</a>
+              <form method="get" action="{% url 'portal:volunteer_details' vol.id %}">
+                <button type="submit" class="btn primary-bg-color text-white btn-sm">Details</button>
+              </form>
             </td>
 
           </tr>

@@ -44,6 +44,9 @@ body {
   background-color: #B3C8CF;
 }
 
+.primary-bg-color {
+  background-color: #89A8B2!important;
+}
 
 
 #foo {

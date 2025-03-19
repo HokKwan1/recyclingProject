@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-      <button type="submit" class="btn btn-primary btn-lg">Filter</button>
+      <button type="submit" class="btn primary-bg-color btn-lg text-white">Filter</button>
     </form>
     <div class="table" style="max-height: 800px; overflow-y: auto; overflow-x: auto;">
       <table class="table table-striped table-hover table-bordered">
@@ -75,13 +75,13 @@
               <td>
                 <form method="post" action="{% url 'portal:claim_request' req.id %}">
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-primary btn-sm">Claim</button>
+                  <button type="submit" class="btn primary-bg-color text-white btn-sm">Claim</button>
                 </form>
               </td>
               {% else %}
               <td>
                 <form method="get" action="{% url 'portal:request_details' req.id %}">
-                  <button type="submit" class="btn btn-primary btn-sm">Details</button>
+                  <button type="submit" class="btn primary-bg-color text-white btn-sm">Details</button>
                 </form>
               </td>
               {% endif %}

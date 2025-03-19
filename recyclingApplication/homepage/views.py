@@ -2,54 +2,56 @@ import secrets
 
 from django.shortcuts import render
 from django.views import View
-from .forms import CreateRequestForm
+from .forms import CreateRequestForm, RequestByTokenForm
 from django.utils import timezone
 from portal.services.email_services import EmailService
-
-# Create your views here.
+from homepage.models import Request
 
 class IndexView(View):
     def get(self, request):
-        form = CreateRequestForm()
+        create_form = CreateRequestForm()
+        token_form = RequestByTokenForm()
         return render(request, "homepage/index.html", {
-            "createRequestForm": form
+            "createRequestForm": create_form,
+            "tokenForm": token_form
         })
 
     def post(self, request):
-        form = CreateRequestForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.date_created = timezone.now().date()
-            instance.status = "pending"
-            token = secrets.token_urlsafe(16)
-            instance.token = token
+        create_form = CreateRequestForm(request.POST) if "request_create" in request.POST else CreateRequestForm()
+        token_form = RequestByTokenForm(request.POST) if "request_lookup" in request.POST else RequestByTokenForm()
 
-            instance.save()
+        # Handle request creation
+        if "request_create" in request.POST:
+            if create_form.is_valid():
+                instance = create_form.save(commit=False)
+                instance.date_created = timezone.now().date()
+                instance.status = "pending"
+                instance.token = secrets.token_urlsafe(16)
 
-            email_service = EmailService()
-            email_service.send_welcome_email(instance=instance)
+                instance.save()
 
-            return render(request, "homepage/thank_you.html", {
-                'token' : token
-            })
-        else:
-            return render(request, "homepage/index.html", {
-            "createRequestForm": form
+                # Send email
+                email_service = EmailService()
+                email_service.send_welcome_email(instance=instance)
+
+                return render(request, "homepage/thank_you.html", {
+                    'token': instance.token
+                })
+
+        # Handle request lookup
+        elif "request_lookup" in request.POST:
+            if token_form.is_valid():
+                token = token_form.cleaned_data["token"]
+                request_obj = Request.objects.filter(token=token).first()
+
+                if request_obj:
+                    return render(request, "homepage/request_details.html", {
+                        "request_obj": request_obj
+                    })
+                else:
+                    token_form.add_error("token", "No request found with this token.")
+
+        return render(request, "homepage/index.html", {
+            "createRequestForm": create_form,
+            "tokenForm": token_form
         })
-
-        # else:
-            # Not using render here because render always return a success response.
-            # we need to send the 404 error code along with the view
-            # return render(request, "404.html")
-            # return HttpResponseNotFound(render_to_string("404.html"))
-
-            # Or you can raise a Http404, and it will automatically find the
-            # 404.html in the root templates. Just make sure the filename is
-            # 404.html. Require DEBUG=False to show the 404 page.
-            # raise Http404()
-
-    
-
-
-
-

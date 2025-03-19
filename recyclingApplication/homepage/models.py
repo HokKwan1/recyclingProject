@@ -11,7 +11,7 @@ class Request(models.Model):
   
   first_name = models.CharField(max_length=256)
   last_name = models.CharField(max_length=256)
-  email = models.CharField(max_length=256)
+  email = models.EmailField(max_length=256)
   phone = models.CharField(max_length=20)
   address = models.CharField(max_length=256)
   city = models.CharField(max_length=64)
