@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-l3!rqc$(&@h4=lvp#_1=d4evr3rl(o32*07c$62*=&_nrey+23
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["recyclingproject-production.up.railway.app", "127.0.0.1"]
 
 
 # Application definition
