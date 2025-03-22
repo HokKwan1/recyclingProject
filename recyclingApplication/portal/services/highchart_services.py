@@ -137,7 +137,7 @@ def createCityCountBreakdownChart():
             'gridLineWidth': 0
         },
         'tooltip': {
-            'valueSuffix': ' millions'
+            'valueSuffix': 'requests'
         },
         'plotOptions': {
             'bar': {
