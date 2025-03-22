@@ -10,6 +10,7 @@ class LoginForm(forms.Form):
     })
     password = forms.CharField(max_length=30, widget=forms.PasswordInput())
 
+
 class VolunteerForm(forms.ModelForm):
     class Meta:
         model = User
@@ -17,26 +18,48 @@ class VolunteerForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),  # To hide password input
         }
-        
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_staff = False  # Ensure the new user is a volunteer
         if commit:
-            user.set_password(self.cleaned_data["password"])  # Hash password before saving
+            # Hash password before saving
+            user.set_password(self.cleaned_data["password"])
             user.save()
         return user
-    
+
 
 class CustomPasswordResetForm(PasswordChangeForm):
     old_password = forms.CharField(
         label="Current Password",
-        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Enter current password"}),
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Enter current password"}),
     )
     new_password1 = forms.CharField(
         label="New Password",
-        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Enter new password"}),
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Enter new password"}),
     )
     new_password2 = forms.CharField(
         label="Confirm New Password",
-        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Confirm new password"}),
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Confirm new password"}),
     )
+
+
+class AdminForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),  # To hide password input
+        }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_staff = True  # Ensure the new user is a volunteer
+        if commit:
+            # Hash password before saving
+            user.set_password(self.cleaned_data["password"])
+            user.save()
+        return user
