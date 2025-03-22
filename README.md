@@ -6,7 +6,6 @@ RecyclingProject is a web application designed to help users learn about and eng
 
 -   **Homepage:** A public-facing landing page.
 -   **Portal:** A section of the application likely for user accounts and more detailed recycling information.
--   **Admin Interface:** A Django admin interface for managing the application.
 
 ## Getting Started
 
