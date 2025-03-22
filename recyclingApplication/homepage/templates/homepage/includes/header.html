@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'challenges/css/header.css' %}" />
 <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
   <div class="container-fluid  mx-5">
-    <a class="navbar-brand" href="http://127.0.0.1:8000/">
+    <a class="navbar-brand" href="{% url 'index' %}">
       <img src="{% static "images/logo.png" %}" alt="Logo" height="45"  class="d-inline-block me-5">
       Recycle For Charity
     </a>

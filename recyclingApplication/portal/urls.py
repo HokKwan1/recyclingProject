@@ -2,6 +2,7 @@ from django.urls import path
 from portal.views.settingView import  CustomPasswordResetView
 from portal.views.dashboardView import DashboardView
 from portal.views.authView import LoginView, LogoutView
+from portal.views.userVieww import CreateUserView
 from portal.views.volunteerView import AddVolunteerView, VolunteersView, VolunteerDetailsView
 from portal.views.requestsView import RequestsView, RequestDetailsView, AvailableRequestView, ClaimRequestView, VolunteerRequestView, CompleteRequestView
 
@@ -20,5 +21,6 @@ urlpatterns = [
     path("add-volunteer", AddVolunteerView.as_view(), name="add_volunteer"),
     path("volunteer-details/<int:id>", VolunteerDetailsView.as_view(), name="volunteer_details"),
     path("settings", CustomPasswordResetView.as_view(), name="settings"),
-    path("dashboard", DashboardView.as_view(), name="dashboard")
+    path("dashboard", DashboardView.as_view(), name="dashboard"),
+    path("create-user", CreateUserView.as_view(), name="create_user"),
 ]

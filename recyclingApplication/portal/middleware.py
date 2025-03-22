@@ -7,7 +7,8 @@ import time
 # Redirect user to 
 class Redirect404Middleware(MiddlewareMixin):
     def process_response(self, request, response):
-        if response.status_code == 404:
+        if response.status_code == 404  and not request.path.startswith('/admin'):
+            print(request.path)
             messages.error(request, "Page Not Found 404")
             if (request.user.is_staff):
                 return redirect("portal:dashboard")  # Redirect all 404s to home
